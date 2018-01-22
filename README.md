@@ -4,7 +4,7 @@ The Wikimedia Commons Helper Tools are a set of `pywikibot`-based notebooks that
 1. `gencat_upload`: From the press release of the Generalitat of Catalonia.
 2. `moncloa_upload`: From the photo galleries of La Moncloa, the Ministry of Presidency of the Government of Spain.
 3. `moncloa_fototeca_upload`: From the photo library (*fototeca*) of La Moncloa, the Ministry of Presidency of the Government of Spain.
-4. `eldiario.es`: From [eldiario.es](http://www.eldiario.es/), a Spanish newspaper that publishes its contents under a CC-BY-SA license.
+4. `eldiario.es_upload`: From [eldiario.es](http://www.eldiario.es/), a Spanish newspaper that publishes its contents under a CC-BY-SA license.
 5. `diariomadrid`: From the press releases of [diario.madrid.es](http://diario.madrid.es/), the news room of the City of Madridy, which publishes its contents under a CC license as well.
 
 ### Installation
@@ -98,6 +98,30 @@ categories = ['December 2017 in Catalonia',
 
 #### `moncloa_fototeca_upload`
 
-#### `eldiario.es`
+#### `eldiario.es_upload`
+`eldiario.es_upload` enables upload from [eldiario.es](http://www.eldiario.es/) articles. According to its [license](http://www.eldiario.es/licencia/), eldiario.es materials are published under a CC-BY-SA-3.0 license. Mind that a careful analysis has to be carried out before uploading material from eldiario.es as many times is shows as own material media by news agencies. At the moment, the following eldiario.es photographers are identified and considered as valid sources: *Marta Jara*, *[Robert Bonet](http://www.eldiario.es/autores/robert_bonet/)*, *[Sandra Lázaro](http://www.eldiario.es/autores/sandra_lazaro_-fotos/)*, *[Juan Manzanara](http://www.eldiario.es/autores/juan_manzanara/)*, *[Sònia Calvó](http://www.eldiario.es/autores/sonia_calvo/)*, *[Carlos Hernández](http://www.eldiario.es/autores/carlos_hernandez/)*, and *[Enric Català](http://www.eldiario.es/autores/enric_catala_-fotos/)*. It is important to note than the notebook retrieves the higher existing resolution images, by analyzing the image file name and changing the last characters to `_1` (i.e., the highest resolution version of `diputado-PSOE-Eduardo-Madina_EDIIMA20161107_0795_20.jpg` is `diputado-PSOE-Eduardo-Madina_EDIIMA20161107_0795_1.jpg`). Such higher resolution version is accepted in Wikimedia Commons (see [here](https://commons.wikimedia.org/wiki/Commons:Deletion_requests/Files_uploaded_by_KOKUYO#Files_uploaded_by_KOKUYO_(talk_%C2%B7_contribs)_4).
+
+There are several pieces of code you need to update:
+
+1. The address of the page. Below you can see an example (simple quotes are used to include the address, which must start with the protocol, `http`):
+```python
+url = 'http://www.eldiario.es/politica/democracia-crisis-instituciones_0_234126756.html'
+```
+2. The Commons categories you wish to assign to the uploaded images (only the name, get rid of the `Category:` prefix):
+```python
+categories = ['Ignacio Sánchez-Cuenca', '2014 in Spain']
+```
+3. The author, if you don't want the notebook to extract it:
+```python
+author = ''
+```
+4. Any additional category you might to include, for instace, related to you as uploader:
+```python
+upload_categories = ['Files uploaded by Supercommonsuploader']
+```
+5. The images in the page you don't want to upload (not valid photography, lower resolution...). The photograph series in the page starts in `0`. That is, if you want to exclude the second and the third images, include `1` and `2`:
+```python
+excluded = [1, 2]
+```
 
 #### `diario.madrid`
