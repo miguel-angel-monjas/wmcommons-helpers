@@ -65,7 +65,7 @@ usernames['commons']['commons'] = 'Dummy'
 jupyter notebook
 ```
 
-8. Once the notebook server opens in your browser, pick up the notebook you want to use.
+8. Once the notebook server opens in your browser, pick up the notebook you want to use. Edit it to include the address of the page where the images are and the categories you want to assign and run all the cells.
 
 #### PAWS installation
 As mentioned above, `pywikibot` is available without any further task to execute and the only additional work you need to carry out is cloning the repo and installing the additional packages (authentication is done through OAuth):
@@ -76,7 +76,7 @@ git clone https://github.com/miguel-angel-monjas/wmcommons-helpers.git
 cd wmcommons-helpers
 pip install -r requirements.txt
 ```
-3. Go back to the home and access the `wmcommons-helpers` folder. You'll see the list of available notebooks.
+3. Go back to the home and access the `wmcommons-helpers` folder. You'll see the list of available notebooks. Choose one, edit it to include the address of the page where the images are and the categories you want to assign and run all the cells.
 
 ### Use
 If you're using the PAWS option, you are not even required to know Python. All the notebooks require some customization (for instance, the URL of the page where the images you want to upload are), but no actual Python knowledge is needed. Next, I'll explain what you need to do to upload images to Wikimedia Commons.
