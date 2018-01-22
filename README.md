@@ -60,13 +60,15 @@ mylang = 'commons'
 usernames['commons']['commons'] = 'Dummy'
 ```
 
-7. Run the notebooks:
+7. Run Jupyter:
 ```bash
 jupyter notebook
 ```
 
+8. Once the notebook server opens in your browser, pick up the notebook you want to use.
+
 #### PAWS installation
-As mentioned above, `pywikibot` is already installed and the only additional work you need to do is cloning the repo and installing the additional packages:
+As mentioned above, `pywikibot` is available without any further task to execute and the only additional work you need to carry out is cloning the repo and installing the additional packages (authentication is done through OAuth):
 1. Access to [PAWS](https://paws.wmflabs.org/). You'll be asked to get authenticated. Use your credentials.
 2. Create a bash notebook. Run the following commands:
 ```bash
@@ -74,10 +76,23 @@ git clone https://github.com/miguel-angel-monjas/wmcommons-helpers.git
 cd wmcommons-helpers
 pip install -r requirements.txt
 ```
+3. Go back to the home and access the `wmcommons-helpers` folder. You'll see the list of available notebooks.
 
 ### Use
+If you're using the PAWS option, you are not even required to know Python. All the notebooks require some customization (for instance, the URL of the page where the images you want to upload are), but no actual Python knowledge is needed. Next, I'll explain what you need to do to upload images to Wikimedia Commons.
+
 #### `gencat_upload`
-`gencat_upload` has been designed to enable automatic uploads from the Generalitat of Catalonia press releases (notes de premsa).
+`gencat_upload` has been designed to enable automatic uploads from the Generalitat of Catalonia press releases (notes de premsa). There are four pieces of code you need to update:
+
+1. The address of the page (mind that it must be under the `premsa.gencat.cat` hostname). Below you can see an example (simple quotes are used to include the address, which must start with the protocol, `http`):
+```python
+url = 'http://premsa.gencat.cat/pres_fsvp/AppJava/notapremsavw/304364/ca/bioinformatic-roderic-guigo-guanya-premi-nacional-recerca-2017.do'
+```
+2. The Commons categories you wish to assign to the uploaded images:
+```python
+categories = ['December 2017 in Catalonia',
+             'Roderic Guigóz']
+```
 
 #### `moncloa_upload`
 
