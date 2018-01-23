@@ -42,3 +42,12 @@ def get_hash (file_path):
     hashObject = sha1()
     hashObject.update(byte_stream)
     return hashObject.hexdigest()
+
+def sanitize_filename (filename):
+    filename = filename.replace(': ', ' - ').replace('  ', '')
+    quote_chars = ['?', '<', '>', '"', '|']
+    space_chars = ['/', '\\', '*', '|']
+    chars = list(filename)
+    chars = [c if c not in quote_chars else "'" for c in chars]
+    chars = [c if c not in space_chars else " " for c in chars]
+    return ''.join(chars)

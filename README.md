@@ -81,45 +81,59 @@ pip install -r requirements.txt
 ### Use
 If you're using the PAWS option, you are not even required to know Python. All the notebooks require some customization (for instance, the URL of the page where the images you want to upload are), but no actual Python knowledge is needed. Next, I'll explain what you need to do to upload images to Wikimedia Commons.
 
-#### `gencat_upload`
-`gencat_upload` has been designed to enable automatic uploads from the Generalitat of Catalonia press releases (notes de premsa). There are four pieces of code you need to update:
+#### `gencat_upload.ipynb`
+`gencat_upload` has been designed to enable automatic uploads from the Generalitat of Catalonia press releases (notes de premsa). High resolution images are linked from the lower part of the page. The notebook retrieves such images and uploads them to Wikimedia Commons. However, the photographs actually embedded in the press release are not uploaded.
 
-1. The address of the page (mind that it must be under the `premsa.gencat.cat` hostname). Below you can see an example (simple quotes are used to include the address, which must start with the protocol, `http`):
+There are four pieces of code you need to update:
+
+1. The address of the page (**mandatory**) (mind that it must be under the `premsa.gencat.cat` hostname). Below you can see an example (simple quotes are used to include the address, which must start with the protocol, `http`):
 ```python
 url = 'http://premsa.gencat.cat/pres_fsvp/AppJava/notapremsavw/304364/ca/bioinformatic-roderic-guigo-guanya-premi-nacional-recerca-2017.do'
 ```
-2. The Commons categories you wish to assign to the uploaded images:
+2. The Commons categories you wish to assign to the uploaded images (only the name, get rid of the `Category:` prefix) (**mandatory**, however you can provide an empty list). If the category does not exist, the notebook does not creates it:
 ```python
 categories = ['December 2017 in Catalonia',
              'Roderic Guigóz']
 ```
-
-#### `moncloa_upload`
-
-#### `moncloa_fototeca_upload`
-
-#### `eldiario.es_upload`
-`eldiario.es_upload` enables upload from [eldiario.es](http://www.eldiario.es/) articles. According to its [license](http://www.eldiario.es/licencia/), eldiario.es materials are published under a CC-BY-SA-3.0 license. Mind that a careful analysis has to be carried out before uploading material from eldiario.es as many times is shows as own material media by news agencies. At the moment, the following eldiario.es photographers are identified and considered as valid sources: *Marta Jara*, *[Robert Bonet](http://www.eldiario.es/autores/robert_bonet/)*, *[Sandra Lázaro](http://www.eldiario.es/autores/sandra_lazaro_-fotos/)*, *[Juan Manzanara](http://www.eldiario.es/autores/juan_manzanara/)*, *[Sònia Calvó](http://www.eldiario.es/autores/sonia_calvo/)*, *[Carlos Hernández](http://www.eldiario.es/autores/carlos_hernandez/)*, and *[Enric Català](http://www.eldiario.es/autores/enric_catala_-fotos/)*. It is important to note than the notebook retrieves the higher existing resolution images, by analyzing the image file name and changing the last characters to `_1` (i.e., the highest resolution version of `diputado-PSOE-Eduardo-Madina_EDIIMA20161107_0795_20.jpg` is `diputado-PSOE-Eduardo-Madina_EDIIMA20161107_0795_1.jpg`). Such higher resolution version is accepted in Wikimedia Commons (see [here](https://commons.wikimedia.org/wiki/Commons:Deletion_requests/Files_uploaded_by_KOKUYO#Files_uploaded_by_KOKUYO_(talk_%C2%B7_contribs)_4).
-
-There are several pieces of code you need to update:
-
-1. The address of the page. Below you can see an example (simple quotes are used to include the address, which must start with the protocol, `http`):
-```python
-url = 'http://www.eldiario.es/politica/democracia-crisis-instituciones_0_234126756.html'
-```
-2. The Commons categories you wish to assign to the uploaded images (only the name, get rid of the `Category:` prefix):
-```python
-categories = ['Ignacio Sánchez-Cuenca', '2014 in Spain']
-```
-3. The author, if you don't want the notebook to extract it:
-```python
-author = ''
-```
-4. Any additional category you might to include, for instace, related to you as uploader:
+3. Any additional category you might to include, for instace, related to you as uploader (**mandatory**, however you can provide an empty list):
 ```python
 upload_categories = ['Files uploaded by Supercommonsuploader']
 ```
-5. The images in the page you don't want to upload (not valid photography, lower resolution...). The photograph series in the page starts in `0`. That is, if you want to exclude the second and the third images, include `1` and `2`:
+4. The name assigned to the photograph
+
+5. The images in the page you don't want to upload (not valid photography, lower resolution...). The photograph series in the page starts in `0`. That is, if you want to exclude the second and the third images, include `1` and `2` (**mandatory**, however you can provide an empty list):
+```python
+excluded = [1, 2]
+```
+
+#### `moncloa_upload.ipynb`
+
+#### `moncloa_fototeca_upload.ipynb`
+
+#### `eldiario.es_upload.ipynb`
+`eldiario.es_upload` enables upload from [eldiario.es](http://www.eldiario.es/) articles. According to its [license](http://www.eldiario.es/licencia/), eldiario.es materials are published under a CC-BY-SA-3.0 license. Mind that a careful analysis has to be carried out before uploading material from eldiario.es as many times is shows as own material media by news agencies. At the moment, the following eldiario.es photographers are identified and considered as valid sources: *Marta Jara*, *[Robert Bonet](http://www.eldiario.es/autores/robert_bonet/)*, *[Sandra Lázaro](http://www.eldiario.es/autores/sandra_lazaro_-fotos/)*, *[Juan Manzanara](http://www.eldiario.es/autores/juan_manzanara/)*, *[Sònia Calvó](http://www.eldiario.es/autores/sonia_calvo/)*, *[Carlos Hernández](http://www.eldiario.es/autores/carlos_hernandez/)*, and *[Enric Català](http://www.eldiario.es/autores/enric_catala_-fotos/)*.
+
+It is important to note than the notebook retrieves the higher existing resolution images, by analyzing the image file name and changing the last characters to `_1` (i.e., the highest resolution version of `diputado-PSOE-Eduardo-Madina_EDIIMA20161107_0795_20.jpg` is `diputado-PSOE-Eduardo-Madina_EDIIMA20161107_0795_1.jpg`). Such higher resolution version is accepted in Wikimedia Commons (see [here](https://commons.wikimedia.org/wiki/Commons:Deletion_requests/Files_uploaded_by_KOKUYO#Files_uploaded_by_KOKUYO_(talk_%C2%B7_contribs)_4)).
+
+There are several pieces of code in the notebook you need to update:
+
+1. The address of the page (**mandatory**). Below you can see an example (simple quotes are used to include the address, which must start with the protocol, `http`):
+```python
+url = 'http://www.eldiario.es/politica/democracia-crisis-instituciones_0_234126756.html'
+```
+2. The Commons categories you wish to assign to the uploaded images (only the name, get rid of the `Category:` prefix) (**mandatory**, however you can provide an empty list). If the category does not exist, the notebook does not creates it:
+```python
+categories = ['Ignacio Sánchez-Cuenca', '2014 in Spain']
+```
+3. The author, if you don't want the notebook to extract it (**optional**, you can comment it):
+```python
+author = ''
+```
+4. Any additional category you might to include, for instace, related to you as uploader (**mandatory**, however you can provide an empty list):
+```python
+upload_categories = ['Files uploaded by Supercommonsuploader']
+```
+5. The images in the page you don't want to upload (not valid photography, lower resolution...). The photograph series in the page starts in `0`. That is, if you want to exclude the second and the third images, include `1` and `2` (**mandatory**, however you can provide an empty list):
 ```python
 excluded = [1, 2]
 ```
